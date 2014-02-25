@@ -42,6 +42,16 @@ public class FileOpener extends CordovaPlugin {
     }
 
     private void openFile(String url) throws IOException {
+		// Replace if url is consistent
+		String fep = "cdvfile://localhost/persistent";
+        String esd = Environment.getExternalStorageDirectory().getAbsolutePath();
+        //Log.v("File Url: ", url);
+        //Log.v("External storage directory: ", esd);
+        if(url.contains(fep)){
+        	url = url.replace(fep, "file://" + esd);
+        	//Log.v("File path: ", url);
+        }
+		
         // Create URI
         Uri uri = Uri.parse(url);
 
